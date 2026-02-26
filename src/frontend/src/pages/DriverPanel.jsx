@@ -228,8 +228,8 @@ const DriverPanel = () => {
     }
 
     const demoInterval = setInterval(() => {
-      lat += 0.0003;
-      lng += 0.0003;
+      lat -= 0.0004;
+      lng += 0.00005;
 
       const newPos = [lat, lng];
       setCurrentLocation(newPos);
