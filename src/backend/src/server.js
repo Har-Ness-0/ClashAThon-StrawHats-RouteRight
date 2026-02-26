@@ -16,13 +16,7 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 const allowedOrigin = process.env.FRONTEND_URL || "http://localhost:5173";
-app.use(
-  cors({
-    origin: allowedOrigin,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-  }),
-);
+app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.get("/api/authenticate", authenticate, (req, res) => {
@@ -65,15 +59,8 @@ app.get("/", (req, res) => {
   res.send("API Running");
 });
 
-// 2. Optimized Socket.io for Render/Vercel
 const io = new Server(server, {
-  cors: {
-    origin: allowedOrigin,
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-  // Adding transport fallbacks helps when WebSockets are unstable
-  transports: ["websocket", "polling"],
+  cors: { origin: "*", methods: ["GET", "POST"] }, // Allowing all originns for testing
 });
 
 io.on("connection", (socket) => {
@@ -125,10 +112,8 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-export default app
