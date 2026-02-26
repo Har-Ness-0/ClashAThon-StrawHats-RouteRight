@@ -16,7 +16,6 @@ import { io } from "socket.io-client";
 import { useLocation } from "react-router-dom";
 import { API_BASE_URL, SOCKET_URL } from "../../src/config.js";
 
-
 // --- CONFIG ---
 const socket = io(`${SOCKET_URL}`, {
   transports: ["websocket"],
@@ -220,8 +219,8 @@ const DriverPanel = () => {
     setCurrentSpeed(demoSpeed);
 
     // Starting coordinates
-    let lat = 26.4525;
-    let lng = 87.2718;
+    let lat = 26.65651221975266;
+    let lng = 87.30127110389105;
     const startPos = [lat, lng];
 
     if (mapRef) {
